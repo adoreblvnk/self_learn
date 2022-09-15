@@ -2,14 +2,12 @@
 #include <string>
 
 // 5 Statements & Functions
-int addNumbers(int first_param, int second_param)
-{
+int addNumbers(int first_param, int second_param) {
     int sum = first_param + second_param;
     return sum;
 }
 
-int main()
-{
+int main() {
     // 2 First Steps
 
     // 2 First C++ Program
@@ -29,7 +27,7 @@ int main()
     */
 
     // 5 Statements & Functions
-    int first_num{3}; // statement.
+    int first_num{3};  // statement.
     int second_num{7};
     int sum = addNumbers(first_num, second_num);
     std::cout << "sum: " << sum << std::endl;
@@ -43,7 +41,7 @@ int main()
     int age;
     std::string full_name;
     std::cout << "type your name & age: " << std::endl;
-    std::getline(std::cin, full_name); // data with spaces.
+    std::getline(std::cin, full_name);  // data with spaces.
     std::cin >> age;
     std::cout << "hello " << full_name << " your age is " << age << std::endl;
 
