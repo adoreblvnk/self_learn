@@ -34,5 +34,14 @@ int main() {
               << std::endl;
     delete p_num;
     p_num = nullptr;
+
+    // 8 Null Pointer Safety
+    // check for null pointer.
+    if (p_num) {
+        std::cout << "p_num pointers to a VALID address: " << p_num
+                  << std::endl;
+    } else {
+        std::cout << "p_num pointers to an INVALID address." << std::endl;
+    }
     return 0;
 }
