@@ -8,10 +8,8 @@ int main() {
     // 8 Output Formatting
     // text width.
     std::cout << std::left;
-    std::cout << std::setw(10) << "Firstname" << std::setw(10) << "Lastname"
-              << std::endl;
-    std::cout << std::setw(10) << "adore" << std::setw(10) << "blvnk"
-              << std::endl;
+    std::cout << std::setw(10) << "Firstname" << std::setw(10) << "Lastname" << std::endl;
+    std::cout << std::setw(10) << "adore" << std::setw(10) << "blvnk" << std::endl;
     std::cout << std::setw(10) << "nitro" << std::setw(10) << "poops"
               << std::endl;
     std::cout << std::endl;
