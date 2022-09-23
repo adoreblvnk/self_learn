@@ -23,6 +23,5 @@ int main() {
     std::cout << "modified num address: " << &num << std::endl;
     std::cout << "modified reference num: " << ref_num << std::endl;
     std::cout << "modified reference num address: " << &ref_num << std::endl;
-
     return 0;
 }
