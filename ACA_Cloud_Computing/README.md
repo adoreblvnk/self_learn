@@ -14,6 +14,8 @@
 - [Materials](#materials)
 - [Content](#content)
   - [ECS (Elastic Compute Service)](#ecs-elastic-compute-service)
+  - [VPC](#vpc)
+  - [SLB (Server Load Balancer)](#slb-server-load-balancer)
 </details>
 
 ## Materials
@@ -87,6 +89,53 @@
 
 - **Instance Metadata**: Contains Instance ID, IP, OS name.
 - **User data**: Refers to input info related for automated bootstrapping when instance is created.
+
+### VPC
+
+### SLB (Server Load Balancer)
+
+**SLB**
+
+- **SLB (Server Load Balancer)**: Traffic distribution control service that distributes traffic among ECS instances according to forwarding rules.
+- **SLB Advantages**:
+  1. **HA**: 99.95% service availability.
+  2. **Scalability**
+  3. **Low Cost**: Reduce cost by 60% compared to traditional hardware load balancers.
+  4. **Security**: Defend against <5 Gbps DDoS attacks.
+
+**SLB Architecture**
+
+- **SLB Layers**:
+  1. **Layer 4 (TCP / UDP)**: No header modification for traffic.
+  2. **Layer 7 (HTTP / HTTPS)**: Header modification. `X-Forwarded-For` header contains client IP address.
+
+**SLB Components**
+
+- **SLB Instance**: Service that is region-bound. Receives incoming requests & forwards them to backend servers.
+- **Listeners**: Listeners listens for client requests & decides where to send them. Also performs health checks on backend servers.
+  - **Listener Configurations**:
+    1. **Routing Rules**: How traffic is distributed among ECS instances.
+      - **Round Robin**: Sequentially distributed.
+      - **WRR (Weighted Round Robin)**: Distributed among weighted ECS instances, which can be set.
+      - **WLC (Weighted Least Connections)**: Distributed among weighted ECS instances & number of connections.
+    2. **Session Stickiness**: Ensures web traffic in session will be forwarded to same ECS instance.
+    3. **Health Check**: Checks if ECS instances are functioning.
+      - **Layer 7**: Health check via HTTP head request.
+      - **Layer 4 (TCP)**: SLB sends SYN, SYN/ACK, ACK, RST.
+      - **Layer 4 (UDP)**: SLB sends UDP probe & expects no response. ICMP Unreachable signifies failed health check.
+  - **Listener Limitations**: < 50 listeners per SLB.
+- **Backend Servers**: ECS instances.
+  - **Backend Server Limitations**
+    1. **No Cross-Region Deployment**
+    2. **No Limitation on OS**
+  - **Backend Server Groups**
+    1. **Master-Slave Group (Layer 4)**: Request forwarded to slave server when master server is down.
+    2. **VServer Group (Layer 7)**: For customised distribution, eg configuring domain name & URL forwarding rules.
+- **SLB Cost Methods**
+  1. **Public Network SLB**: Only supports PAYG billing mode.
+  2. **Private Network SLB**: Free.
+
+**SLB Additional Settings**
 
 ## Credits <!-- omit in toc -->
 
