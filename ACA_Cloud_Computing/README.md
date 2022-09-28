@@ -83,6 +83,11 @@
   4. **SLB (Server Load Balancer)**: *NOTE: For inbound traffic only.*
 - **ENI (Elastic Network Interface)**: Virtual network interface to connect between ECS instance & public / private network.
 
+**ECS Additional Settings**
+
+- **Instance Metadata**: Contains Instance ID, IP, OS name.
+- **User data**: Refers to input info related for automated bootstrapping when instance is created.
+
 ## Credits <!-- omit in toc -->
 
 - blvnk
