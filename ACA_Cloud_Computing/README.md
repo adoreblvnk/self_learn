@@ -16,7 +16,8 @@
   - [ECS (Elastic Compute Service)](#ecs-elastic-compute-service)
   - [VPC](#vpc)
   - [SLB (Server Load Balancer)](#slb-server-load-balancer)
-</details>
+  - [OSS (Object Storage Service)](#oss-object-storage-service)
+  </details>
 
 ## Materials
 
@@ -52,7 +53,7 @@
   - **Multi-zone Deployment Uptime**: 99.995% / mth.
 - **ECS Instance Billing Model**
   1. **PAYG (Pay-As-You-Go)**
-  2. **Subscription**: *NOTE: Can't delete instance & restart.*
+  2. **Subscription**: _NOTE: Can't delete instance & restart._
   3. **Preemptible Instance**: Similar to PAYG but via bid-based pricing. If bid is lower than asking price, instance is shut down.
   4. **Reserved Instances**: Hybrid of PAYG & Subscription by choosing a split of PAYG & upfront payment for specified amount of time.
 
@@ -60,7 +61,7 @@
 
 - **Pangu**: Name of distributed file system for ECS.
 - **Cloud Disk**: Storage for ECS. Purchased separately of ECS instance. Must be mounted to instance in the **same zone**.
-- **Cloud Disk Types**: *NOTE: Upgrades improve IOPS (IO Per Second) & throughput.*
+- **Cloud Disk Types**: _NOTE: Upgrades improve IOPS (IO Per Second) & throughput._
   1. **Ultra Disk**
   2. **Standard SSD**
   3. **Enhanced SSD**
@@ -68,7 +69,7 @@
 - **Disk Snapshot Types**
   1. **Manual Snapshot**: Up to **256** snapshots.
   2. **Auto Snapshot**: Snapshots are made based on snapshot policy, which details snapshot creation frequency & snapshot retention. Up to **1000** snapshots.
-**Disk Image**: Complete runtime env used to create an ECS instance. 4 types of Disk Images: Public, Marketplace, Custom, Shared (between Alibaba accounts).
+     **Disk Image**: Complete runtime env used to create an ECS instance. 4 types of Disk Images: Public, Marketplace, Custom, Shared (between Alibaba accounts).
 
 **ECS Networking**
 
@@ -76,13 +77,13 @@
   - **VRouter**: Routes traffic within VPC.
   - **VSwitch**: Represents a subnet.
 - **EIP (Elastic IP)**: Public IP address for VPC. Purchased separately of ECS. Can be moved between instances.
-- **Security Groups**: Firewall rules that **allow** / **deny** traffic. 
-  - *NOTE: Security Groups are region-bound as VPCs are also region-bound.*
+- **Security Groups**: Firewall rules that **allow** / **deny** traffic.
+  - _NOTE: Security Groups are region-bound as VPCs are also region-bound._
 - **VPC Communication with Internet**
-  1. **Assign Public IP**: *NOTE: This public IP lives & dies with instance.*
+  1. **Assign Public IP**: _NOTE: This public IP lives & dies with instance._
   2. **EIP**
   3. **Attach NAT Gateway to VPC Group**
-  4. **SLB (Server Load Balancer)**: *NOTE: For inbound traffic only.*
+  4. **SLB (Server Load Balancer)**: _NOTE: For inbound traffic only._
 - **ENI (Elastic Network Interface)**: Virtual network interface to connect between ECS instance & public / private network.
 
 **ECS Additional Settings**
@@ -115,14 +116,14 @@
 - **Listeners**: Listeners listens for client requests & decides where to send them. Also performs health checks on backend servers.
   - **Listener Configurations**:
     1. **Routing Rules**: How traffic is distributed among ECS instances.
-      - **Round Robin**: Sequentially distributed.
-      - **WRR (Weighted Round Robin)**: Distributed among weighted ECS instances, which can be set.
-      - **WLC (Weighted Least Connections)**: Distributed among weighted ECS instances & number of connections.
+       - **Round Robin**: Sequentially distributed.
+       - **WRR (Weighted Round Robin)**: Distributed among weighted ECS instances, which can be set.
+       - **WLC (Weighted Least Connections)**: Distributed among weighted ECS instances & number of connections.
     2. **Session Stickiness**: Ensures web traffic in session will be forwarded to same ECS instance.
     3. **Health Check**: Checks if ECS instances are functioning.
-      - **Layer 7**: Health check via HTTP head request.
-      - **Layer 4 (TCP)**: SLB sends SYN, SYN/ACK, ACK, RST.
-      - **Layer 4 (UDP)**: SLB sends UDP probe & expects no response. ICMP Unreachable signifies failed health check.
+       - **Layer 7**: Health check via HTTP head request.
+       - **Layer 4 (TCP)**: SLB sends SYN, SYN/ACK, ACK, RST.
+       - **Layer 4 (UDP)**: SLB sends UDP probe & expects no response. ICMP Unreachable signifies failed health check.
   - **Listener Limitations**: < 50 listeners per SLB.
 - **Backend Servers**: ECS instances.
   - **Backend Server Limitations**
@@ -145,6 +146,53 @@
 - **SLB Security**: Protection against DDoS attacks < 5 Gbps.
   1. **Cleaning Threshold**: Scrubs attack traffic.
   2. **Black Hole Threshold**: Shuts all incoming traffic from Internet.
+
+### OSS (Object Storage Service)
+
+**OSS**
+
+- **OSS (Object Storage Service)**: Unstructured data store.
+- **OSS Objects**
+  1. `Key`: Unique object name.
+  2. `Data`: User data.
+  3. `Metadata`: Key-value pair.
+- **OSS Buckets**: Containers for objects.
+- **OSS URL**
+  - https://<span style="color:tomato">images-bucket</span>.oss-ap-southesat-1.aliyuncs.com/<span style="color:mediumseagreen">pic.jpg</span>
+  - <span style="color:tomato">Bucket name.</span>, <span style="color:mediumseagreen">Key (object name)</span>.
+- **OSS Storage Classes**
+  1. **Standard (LRS (Local) / ZRS (Zone))**
+  2. **Infrequent Access**
+  3. **Archive / Cold Archive**
+- **OSS Life Cycle**: Lifecycle rules determine what happens to OSS objects based on time / pattern. This allows objects to transition between Storage Classes to save cost.
+- **OSS Redundancy for Fault Tolerance**
+  1. **Cross-Region Replication**
+  2. **ZRS (Zone-Redundant Storage)**
+  3. **Versioning**
+
+**OSS Image Processing**
+
+- **IMG Access Methods**: Accessed by appending query string (`?x-oss-process=`) to URL.
+  1. **Parameter Mode**: Pass parameters directly after query string.
+  2. **Style Mode**: Create custom style & pass style to query string.
+
+**OSS Website Hosting & Monitoring**
+
+- **OSS Static Website Hosting**: Requires DNS binding.
+
+**OSS Security Features**
+
+- **OSS Security Features**
+  1. **HTTPS Endpoint**: Secures data in transit.
+  2. **Access & Control**: Via ACLs (Access Control Lists).
+     1. **Private**
+     2. **Public Read**
+     3. **Public Read / Write**
+  3. **Server Side Encryption**: For data at rest.
+     1. **SSE-OSS**: Default key.
+     2. **SSE-KMS (Key Management System)**: Use own encryption key.
+  4. **Identity Authentication**: Via RAM (Role Access Management) & STS (Security Token Service).
+- **Time Limited Object Access**
 
 ## Credits <!-- omit in toc -->
 
