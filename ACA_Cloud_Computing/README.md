@@ -137,6 +137,15 @@
 
 **SLB Additional Settings**
 
+- **SLB Multi-Zone Disaster Tolerance**: Utilise the Primary / Backup Zone feature.
+- **Cross-Region Disaster Tolerance**: SLB does NOT help. Use DNS failover capability.
+- **Auto Scaling Benefits**
+  1. **Maintain ECS Instance Availability**: Repair non-functioning instances.
+  2. **Automatically Scale ECS Instances**: Scale up / down.
+- **SLB Security**: Protection against DDoS attacks < 5 Gbps.
+  1. **Cleaning Threshold**: Scrubs attack traffic.
+  2. **Black Hole Threshold**: Shuts all incoming traffic from Internet.
+
 ## Credits <!-- omit in toc -->
 
 - blvnk
