@@ -17,6 +17,7 @@
   - [VPC](#vpc)
   - [SLB (Server Load Balancer)](#slb-server-load-balancer)
   - [OSS (Object Storage Service)](#oss-object-storage-service)
+  - [RDS (Relational Database Service)](#rds-relational-database-service)
   </details>
 
 ## Materials
@@ -29,16 +30,14 @@
 
 ### ECS (Elastic Compute Service)
 
-**ECS Concepts**
+**ECS**: Cloud computing service.
 
-- **ECS**: Cloud computing service.
 - **ECS as IaaS**: Users manage Application, Data, RUntime, Middleware, OS layers. Alicloud manages Virtualisation, Servers, Storage, Networking layers.
 - **Apsara**: Apsara handles storage, scheduling, networking, resource management & distributed coordination for all Alicloud products.
 - **Zones & Regions**: Multiple (typically 3) zones within 1 region.
 
-**ECS Instance**
+**ECS Instance**: Individual cloud VM.
 
-- **ECS Instance**: Individual cloud VM.
 - **ECS Instance Types**
   1. **T / S**: Burstable / light workloads.
   2. **G / C**: General purpose & compute-intensive workloads.
@@ -95,9 +94,8 @@
 
 ### SLB (Server Load Balancer)
 
-**SLB**
+**SLB (Server Load Balancer)**: Traffic distribution control service that distributes traffic among ECS instances according to forwarding rules.
 
-- **SLB (Server Load Balancer)**: Traffic distribution control service that distributes traffic among ECS instances according to forwarding rules.
 - **SLB Advantages**:
   1. **HA**: 99.95% service availability.
   2. **Scalability**
@@ -149,9 +147,8 @@
 
 ### OSS (Object Storage Service)
 
-**OSS**
+**OSS (Object Storage Service)**: Unstructured data store.
 
-- **OSS (Object Storage Service)**: Unstructured data store.
 - **OSS Objects**
   1. `Key`: Unique object name.
   2. `Data`: User data.
@@ -176,9 +173,7 @@
   1. **Parameter Mode**: Pass parameters directly after query string.
   2. **Style Mode**: Create custom style & pass style to query string.
 
-**OSS Website Hosting & Monitoring**
-
-- **OSS Static Website Hosting**: Requires DNS binding.
+**OSS Static Website Hosting**: Requires DNS binding.
 
 **OSS Security Features**
 
@@ -191,8 +186,47 @@
   3. **Server Side Encryption**: For data at rest.
      1. **SSE-OSS**: Default key.
      2. **SSE-KMS (Key Management System)**: Use own encryption key.
-  4. **Identity Authentication**: Via RAM (Role Access Management) & STS (Security Token Service).
+  4. **Identity Authentication**: Via RAM (Resource Access Management) & STS (Security Token Service).
 - **Time Limited Object Access**
+
+### RDS (Relational Database Service)
+
+**RDS**
+
+- **RDS as PaaS**: Users manage only Application & Data layers.
+
+**RDS Instance**: Virtual DB service.
+
+- **RDS Instance Editions**
+  1. **Basic Edition**: 1 node.
+  2. **HA Edition**: 2 nodes (master / slave).
+  3. **Enterprise Edition**: 3 nodes.
+- **RDS Instance Types**
+  1. **Common Instance**: Sharing hardware with other users.
+  2. **Dedicated Instance**: Fully dedicated CPU cores.
+
+**RDS Backup & Recovery**
+
+- **RDS Backup Methods**
+  1. **Automatic Backup**: Via backup policy / backup cycle.
+  2. **Manual Backup**
+- **Backup Billing**: < 50% of purchased storage can be used for backups for free.
+- **Disaster Recovery**: Regional failover requires > 2 RDS instances. 
+
+**RDS Typical Application**
+
+- **Read-Only Instance**: Improve read pressure.
+- **Extensions**: Using Memcache, Redis, OSS (for unstructured files).
+
+**RDS Monitoring & Security**
+
+- **CloudMonitor**: RDS Console.
+- **Security**:
+  1. **Anti-DDoS**
+  2. **IP Whitelist**
+  3. **WAF (Web Application Firewall)**: Against DB attacks.
+- **RAM (Resource Access Management)**: Control user access to entire DB.
+- **DMS (Data Management Service)**: Control access to DB tables, columns, etc.
 
 ## Credits <!-- omit in toc -->
 
