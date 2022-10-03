@@ -260,27 +260,43 @@
   - Only 1 Scaling Group can be active at a time.
   - Scaling Group can only be disabled when no Scaling Activity occurs.
 - **Delete a Scaling Group**
+  - Deletes Scaling Configurations, Scaling Rules, Scaling Activities.
+  - Does NOT delete scheduled tasks, CloudMonitor alarm tasks, SLB instances, RDS instances.
 
-**Scaling Configuration**: ECS instance config.
+**Scaling Configuration**: ECS instance config. Auto Scaling adds ECS instances according to config.
 
 - **Query a Scaling Configuration**
-- **Create a Scaling Configuration**
+  - **Active**: Used to create ECS instances. Only 1 active config allowed.
+  - **Inactive**
+- **Create a Scaling Configuration**: < 10 Scaling Configurations allowed.
 - **Deleting a Scaling Configuration**
 
 **Scaling Rule (Actions)**: Defines how scaling is performed, _eg. adding / removing instances_.
 
-- **Create a Scaling Rule**
+- **Create a Scaling Rule**: _NOTE: MinSize & MaxSize takes precedence over Scaling Rule._
 - **Modify, Query & Delete a Scaling Rule**
 
 **Trigger a Scaling Event**
 
 - **Manually Trigger**
   1. **Execute a Scaling Rule**
+     - Scaling Group is active & no Scaling Activity is present.
   2. **Add ECS Instance**
+     - Scaling Group is active & no Scaling Activity is present.
+     - No cool-down period.
+     - Not associated with active Scaling Configuration.
   3. **Remove ECS Instance**
+     - Depends on "Reclaim Mode" chosen:
+        1. **Shutdown & Reclaim**: Stops ECS instance.
+        2. **Release**: Released.
 - **Automated Trigger**
   1. **Scheduled Task**
+     - < 20 scheduled tasks.
+     - Retried again if Scaling Group is executing Scaling Activity at the same time.
   2. **Event-Triggered Task**
+     - Do NOT need to be unique.
+     - Cannot execute during cool-down period.
+     - Cannot execute if there is Scaling Activity.
 
 ## Credits <!-- omit in toc -->
 
