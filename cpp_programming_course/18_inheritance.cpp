@@ -12,8 +12,8 @@ class Person {
     }
 
    private:
-    string first_name;
-    string last_name;
+    string first_name{"first"};
+    string last_name{"last"};
 
    public:
     Person() = default;
@@ -52,12 +52,9 @@ int main() {
     Black niglet("grage", "floyd", 12);
     cout << "niglet: " << niglet << endl;
 
-    // 25:26:56 10 Copy Constructors With Inheritance
-
-    // 25:51:53 Inheriting Base Constructors
-
-    // 26:06:00 Inheritance With Destructors
-
-    // 26:12:20 Reused Symbols In Inheritance
+    // 10 Copy Constructors with Inheritance
+    // notice how copy_construct copies from niglet.
+    Black copy_construct(niglet);
+    cout << copy_construct << endl;
     return 0;
 }
