@@ -33,7 +33,7 @@
 
 **ECS**: Cloud computing service.
 
-- **ECS as IaaS**: Users manage Application, Data, RUntime, Middleware, OS layers. Alicloud manages Virtualisation, Servers, Storage, Networking layers.
+- **ECS as IaaS**: Users manage Application, Data, Runtime, Middleware, OS layers. Alicloud manages Virtualisation, Servers, Storage, Networking layers.
 - **Apsara**: Apsara handles storage, scheduling, networking, resource management & distributed coordination for all Alicloud products.
 - **Zones & Regions**: Multiple (typically 3) zones within 1 region.
 
