@@ -14,7 +14,6 @@
 - [Materials](#materials)
 - [Content](#content)
   - [ECS (Elastic Compute Service)](#ecs-elastic-compute-service)
-  - [VPC](#vpc)
   - [SLB (Server Load Balancer)](#slb-server-load-balancer)
   - [OSS (Object Storage Service)](#oss-object-storage-service)
   - [RDS (Relational Database Service)](#rds-relational-database-service)
@@ -92,8 +91,6 @@
   - `curl http://100.100.100.200/latest/meta-data`
 - **User data**: Refers to input info related for automated bootstrapping when instance is created.
   - `curl http://100.100.100.200/latest/user-data`
-
-### VPC
 
 ### SLB (Server Load Balancer)
 
